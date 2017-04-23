@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jd.management.projects.dao.RoleDao">
+	<resultMap id="BaseResultMap" type="com.jd.management.domain.Role">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="role_code" property="roleCode" jdbcType="VARCHAR" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="ts" property="ts" jdbcType="TIMESTAMP" />
+		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+		<result column="version" property="version" jdbcType="TINYINT" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		<trim prefix="" suffix="" suffixOverrides=",">
+		id,
+		role_code,
+		role_name,
+		description,
+		create_time,
+		update_time,
+		create_user,
+		update_user,
+		ts,
+		is_delete,
+		version,
+		</trim>
+	</sql>
+	
+	<!-- 根据Id查询 -->
+	<select id="getRole" resultMap="BaseResultMap" parameterType="Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_role
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<!-- 根据条件查询列表 -->
+	<select id="findRoleList" resultMap="BaseResultMap" parameterType="com.jd.management.projects.condition.RoleCondition">
+		select
+		<include refid="Base_Column_List" />
+		from t_role
+		<where>   
+		 is_delete=0
+	 	<if test="po.roleCode != null and po.roleCode != ''">
+			   <![CDATA[   and role_code = #{po.roleCode,jdbcType=VARCHAR}   ]]>  
+    	 </if>
+	 	<if test="po.roleName != null and po.roleName != ''">
+			   <![CDATA[   and role_name = #{po.roleName,jdbcType=VARCHAR}   ]]>  
+    	 </if>
+		</where>
+	</select>
+	<!-- 插入实体 -->
+	<insert id="insertRole" parameterType="com.jd.management.projects.domain.entity.Role" useGeneratedKeys="true" keyProperty="id">
+		insert into t_role 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		id,
+		role_code,
+		role_name,
+		description,
+		create_time,
+		update_time,
+		create_user,
+		update_user,
+		ts,
+		is_delete,
+		version,
+		</trim>
+		values 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		#{id,jdbcType=BIGINT}, 
+		#{roleCode,jdbcType=VARCHAR}, 
+		#{roleName,jdbcType=VARCHAR}, 
+		#{description,jdbcType=VARCHAR}, 
+		#{createTime,jdbcType=TIMESTAMP}, 
+		#{updateTime,jdbcType=TIMESTAMP}, 
+		#{createUser,jdbcType=VARCHAR}, 
+		#{updateUser,jdbcType=VARCHAR}, 
+		#{ts,jdbcType=TIMESTAMP}, 
+		#{isDelete,jdbcType=TINYINT}, 
+		#{version,jdbcType=TINYINT}, 
+		</trim>
+	</insert>
+		<!-- 修改实体 -->
+	<update id="updateRole" parameterType="com.jd.management.projects.domain.entity.Role">
+		update t_role
+		<set>
+			<trim prefix="" suffix="" suffixOverrides=",">
+	        <if test="id != null">
+					id = #{id,jdbcType=BIGINT},
+	      		</if>
+	        <if test="roleCode != null">
+					role_code = #{roleCode,jdbcType=VARCHAR},
+	      		</if>
+	        <if test="roleName != null">
+					role_name = #{roleName,jdbcType=VARCHAR},
+	      		</if>
+	        <if test="description != null">
+					description = #{description,jdbcType=VARCHAR},
+	      		</if>
+	        <if test="createTime != null">
+					create_time = #{createTime,jdbcType=TIMESTAMP},
+	      		</if>
+	        <if test="updateTime != null">
+					update_time = #{updateTime,jdbcType=TIMESTAMP},
+	      		</if>
+	        <if test="createUser != null">
+					create_user = #{createUser,jdbcType=VARCHAR},
+	      		</if>
+	        <if test="updateUser != null">
+					update_user = #{updateUser,jdbcType=VARCHAR},
+	      		</if>
+	        <if test="ts != null">
+					ts = #{ts,jdbcType=TIMESTAMP},
+	      		</if>
+			<if test="isDelete != 0">
+					is_delete = #{isDelete,jdbcType=TINYINT},
+	      		</if>
+			<if test="version != 0">
+					version = #{version,jdbcType=TINYINT},
+	      		</if>
+			</trim>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<!-- 删除实体 -->
+	<update id="deleteRole" parameterType="Long">
+		update t_role
+		<set>
+			is_delete=1
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

@@ -1,4 +1,8 @@
-*.class
+*.project
+*.classpath
+.settings
+META-INF
+target
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

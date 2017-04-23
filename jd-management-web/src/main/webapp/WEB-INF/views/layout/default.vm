@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+	#parse("/common/inc.vm")
+	<script type="text/javascript" charset="UTF-8">
+		var sysbp = sys.basePath();
+	</script>
+
+	<input type="hidden" id="contextPath" value="#springUrl('')">
+	$screen_content
+
+</body>
+</html>

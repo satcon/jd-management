@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jd.management.projects.dao.RoleResourcesDao">
+	<resultMap id="BaseResultMap" type="com.jd.management.domain.RoleResources">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="role_id" property="roleId" jdbcType="BIGINT" />
+		<result column="resources_id" property="resourcesId" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="ts" property="ts" jdbcType="TIMESTAMP" />
+		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+		<result column="version" property="version" jdbcType="TINYINT" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		<trim prefix="" suffix="" suffixOverrides=",">
+		id,
+		role_id,
+		resources_id,
+		create_time,
+		update_time,
+		create_user,
+		update_user,
+		ts,
+		is_delete,
+		version,
+		</trim>
+	</sql>
+	
+	<!-- 根据Id查询 -->
+	<select id="getRoleResources" resultMap="BaseResultMap" parameterType="Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_role_resources
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<!-- 根据条件查询列表 -->
+	<select id="findRoleResourcesList" resultMap="BaseResultMap" parameterType="com.jd.management.projects.condition.RoleResourcesCondition">
+		select
+		<include refid="Base_Column_List" />
+		from t_role_resources
+		<where>   
+		 is_delete=0
+		</where>
+	</select>
+	<!-- 插入实体 -->
+	<insert id="insertRoleResources" parameterType="com.jd.management.projects.domain.entity.RoleResources" useGeneratedKeys="true" keyProperty="id">
+		insert into t_role_resources 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		id,
+		role_id,
+		resources_id,
+		create_time,
+		update_time,
+		create_user,
+		update_user,
+		ts,
+		is_delete,
+		version,
+		</trim>
+		values 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		#{id,jdbcType=BIGINT}, 
+		#{roleId,jdbcType=BIGINT}, 
+		#{resourcesId,jdbcType=BIGINT}, 
+		#{createTime,jdbcType=TIMESTAMP}, 
+		#{updateTime,jdbcType=TIMESTAMP}, 
+		#{createUser,jdbcType=VARCHAR}, 
+		#{updateUser,jdbcType=VARCHAR}, 
+		#{ts,jdbcType=TIMESTAMP}, 
+		#{isDelete,jdbcType=TINYINT}, 
+		#{version,jdbcType=TINYINT}, 
+		</trim>
+	</insert>
+		<!-- 修改实体 -->
+	<update id="updateRoleResources" parameterType="com.jd.management.projects.domain.entity.RoleResources">
+		update t_role_resources
+		<set>
+			<trim prefix="" suffix="" suffixOverrides=",">
+	        <if test="id != null">
+					id = #{id,jdbcType=BIGINT},
+	      		</if>
+	        <if test="roleId != null">
+					role_id = #{roleId,jdbcType=BIGINT},
+	      		</if>
+	        <if test="resourcesId != null">
+					resources_id = #{resourcesId,jdbcType=BIGINT},
+	      		</if>
+	        <if test="createTime != null">
+					create_time = #{createTime,jdbcType=TIMESTAMP},
+	      		</if>
+	        <if test="updateTime != null">
+					update_time = #{updateTime,jdbcType=TIMESTAMP},
+	      		</if>
+	        <if test="createUser != null">
+					create_user = #{createUser,jdbcType=VARCHAR},
+	      		</if>
+	        <if test="updateUser != null">
+					update_user = #{updateUser,jdbcType=VARCHAR},
+	      		</if>
+	        <if test="ts != null">
+					ts = #{ts,jdbcType=TIMESTAMP},
+	      		</if>
+			<if test="isDelete != 0">
+					is_delete = #{isDelete,jdbcType=TINYINT},
+	      		</if>
+			<if test="version != 0">
+					version = #{version,jdbcType=TINYINT},
+	      		</if>
+			</trim>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<!-- 删除实体 -->
+	<update id="deleteRoleResources" parameterType="Long">
+		update t_role_resources
+		<set>
+			is_delete=1
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

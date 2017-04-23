@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="error" strict="true">
+    <Properties>
+        <Property name="LOG.PATH">D:/export/home/tomcat/logs</Property>
+        <!--
+                %d{yyyy-MM-dd HH:mm:ss, SSS} : 日志生产时间
+                %p : 日志输出格式
+                %c : logger的名称
+                %m : 日志内容，即 logger.info("message")
+                %n : 换行符
+                %C : Java类名
+                %L : 日志输出所在行数
+                %M : 日志输出所在方法名
+                hostName : 本地机器名
+                hostAddress : 本地ip地址
+             -->
+        <Property name="LOG.PATTERN">[%-5p][%d{yyyy-MM-dd HH:mm:ss.SSS}]%m[%c%M]%n</Property>
+    </Properties>
+    
+	<!--先定义所有的appender-->
+	<appenders>
+		<!--这个输出控制台的配置-->
+		<Console name="console" target="SYSTEM_OUT">
+			<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+			<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" />
+			<PatternLayout pattern="${LOG.PATTERN}" />
+		</Console>
+
+		<!-- <File name="infoFile" fileName="${LOG.PATH}/jd-delivery-clerk-info.log">
+			<ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" />
+			<PatternLayout pattern="${LOG.PATTERN}" />
+		</File>
+		<File name="errorFile" fileName="/export/home/tomcat/logs/jd-delivery-clerk-error.log">
+			<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
+			<PatternLayout pattern="[%p][%d{yyyy-MM-dd HH:mm:ss.SSS}]%m[%c:%M]%n" />
+		</File> -->
+
+		<!-- INFO FILE -->
+		<RollingRandomAccessFile name="infoFile" bufferSize="8192" immediateFlush="false" append="true" 
+								fileName="${LOG.PATH}/jd_management_info.log" 
+								filePattern="${LOG.PATH}/jd_management_info.log-%d{yyyy-MM-dd}-%i.log">
+			<Filters>
+				<!-- <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />
+				<ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="NEUTRAL" /> -->
+				<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />
+				<!-- <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" /> -->
+			</Filters>
+			<PatternLayout pattern="${LOG.PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了10 -->
+			<DefaultRolloverStrategy max="10" />
+		</RollingRandomAccessFile>
+	
+		<!-- ERROR FILE -->
+		<RollingRandomAccessFile name="errorFile" bufferSize="1024" immediateFlush="false" append="true" 
+								fileName="${LOG.PATH}/jd_management_error.log" 
+								filePattern="${LOG.PATH}/jd_management_error-%d{yyyy-MM-dd}-%i.log">
+			<Filters>
+				<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
+			</Filters>
+			<PatternLayout pattern="${LOG.PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="1" />
+		</RollingRandomAccessFile>
+
+		<Async name="Async">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="infoFile" />
+			<AppenderRef ref="errorFile" />
+		</Async>
+	</appenders>
+
+	<!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
+	<loggers>
+		<!--建立一个默认的root的logger-->
+		<root level="debug">
+			<appender-ref ref="Async" />
+		</root>
+		<Logger name="java.sql" level="DEBUG" />
+		<Logger name="org.springframework" level="INFO" />
+		<Logger name="org.apache.commons" level="INFO" />
+		<Logger name="org.mybatis.spring" level="INFO" />
+		<Logger name="org.apache.ibatis" level="INFO" />
+		<Logger name="org.apache.velocity.app" level="INFO" />
+		<Logger name="org.apache.http.wire" level="INFO" />
+	</loggers>
+
+</configuration>
