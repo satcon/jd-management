@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.jd.management.condition.ResourcesCondition;
 import com.jd.management.domain.Resources;
 import com.jd.management.service.ResourcesService;
@@ -44,7 +46,6 @@ public class ResourcesController extends BaseController{
 	
 	
 	@RequestMapping("/findTreeMenus")
-	@ResponseBody
 	public void findTreeMenus(HttpServletResponse response, ResourcesCondition resourceCondition) throws Exception {
 		logger.info("【findTreeMenus】");
 		List<Resources> resourceList = null;
