@@ -36,9 +36,10 @@
 		</File> -->
 
 		<!-- INFO FILE -->
-		<RollingRandomAccessFile name="infoFile" bufferSize="8192" immediateFlush="false" append="true" 
-								fileName="${LOG.PATH}/jd_management_info.log" 
-								filePattern="${LOG.PATH}/jd_management_info.log-%d{yyyy-MM-dd}-%i.log">
+		<RollingRandomAccessFile name="infoFile" bufferSize="8192" 
+				immediateFlush="false" append="true" 
+				fileName="${LOG.PATH}/jd_management_info.log" 
+				filePattern="${LOG.PATH}/jd_management_info.log-%d{yyyy-MM-dd}-%i.log">
 			<Filters>
 				<!-- <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />
 				<ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="NEUTRAL" /> -->
@@ -47,29 +48,31 @@
 			</Filters>
 			<PatternLayout pattern="${LOG.PATTERN}" />
 			<Policies>
-				<TimeBasedTriggeringPolicy />
+				<!-- <TimeBasedTriggeringPolicy /> -->
 				<SizeBasedTriggeringPolicy size="100MB" />
 			</Policies>
-			<!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了10 -->
-			<DefaultRolloverStrategy max="10" />
+			<!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了50 -->
+			<DefaultRolloverStrategy max="50" />
 		</RollingRandomAccessFile>
 	
 		<!-- ERROR FILE -->
-		<RollingRandomAccessFile name="errorFile" bufferSize="1024" immediateFlush="false" append="true" 
-								fileName="${LOG.PATH}/jd_management_error.log" 
-								filePattern="${LOG.PATH}/jd_management_error-%d{yyyy-MM-dd}-%i.log">
+		<RollingRandomAccessFile name="errorFile" bufferSize="1024" 
+				immediateFlush="false" append="true" 
+				fileName="${LOG.PATH}/jd_management_error.log" 
+				filePattern="${LOG.PATH}/jd_management_error-%d{yyyy-MM-dd}-%i.log">
 			<Filters>
 				<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
 			</Filters>
 			<PatternLayout pattern="${LOG.PATTERN}" />
 			<Policies>
-				<TimeBasedTriggeringPolicy />
+				<!-- <TimeBasedTriggeringPolicy /> -->
 				<SizeBasedTriggeringPolicy size="100MB" />
 			</Policies>
-			<DefaultRolloverStrategy max="1" />
+			<DefaultRolloverStrategy max="5" />
 		</RollingRandomAccessFile>
 
 		<Async name="Async">
+			<!-- 生产环境去掉console -->
 			<AppenderRef ref="console" />
 			<AppenderRef ref="infoFile" />
 			<AppenderRef ref="errorFile" />
@@ -79,9 +82,9 @@
 	<!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
 	<loggers>
 		<!--建立一个默认的root的logger-->
-		<root level="debug">
+		<AsyncRoot level="INFO">
 			<appender-ref ref="Async" />
-		</root>
+		</AsyncRoot>
 		<Logger name="java.sql" level="DEBUG" />
 		<Logger name="org.springframework" level="INFO" />
 		<Logger name="org.apache.commons" level="INFO" />

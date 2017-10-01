@@ -1,7 +1,7 @@
 package com.jd.management.controller;
 
-import javax.servlet.http.HttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,6 @@ public class IndexController extends BaseController {
 	@RequestMapping("/error/notFound")
 	public String notFound(HttpServletRequest request) {
 		logger.info("【404页面】:" + request.getRequestURI());
-		
 		return "error/404";
 	}
 }

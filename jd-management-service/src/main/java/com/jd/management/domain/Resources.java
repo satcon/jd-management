@@ -335,4 +335,17 @@ public class Resources implements Serializable {
 	public void setYn(int yn) {
 		this.yn = yn;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Resources [id=" + id + ", resourceCode=" + resourceCode + ", resourceName=" + resourceName
+				+ ", resourceType=" + resourceType + ", resourceUrl=" + resourceUrl + ", resourceLevel=" + resourceLevel
+				+ ", resourceIcon=" + resourceIcon + ", resourceOrder=" + resourceOrder + ", status=" + status
+				+ ", description=" + description + ", parentId=" + parentId + ", createTime=" + createTime
+				+ ", updateTime=" + updateTime + ", createUser=" + createUser + ", updateUser=" + updateUser + ", ts="
+				+ ts + ", yn=" + yn + "]";
+	}
 }
