@@ -29,30 +29,31 @@ public class ResourcesController extends BaseController{
 	
 	@RequestMapping("/viewMenus")
 	public String viewMenus() throws Exception {
-		logger.info("---【系统菜单】");
+		logger.info("==> [系统菜单]");
 		return "sysmenu/index";
 	}
 	
 	@RequestMapping("/findMenus")
 	public void findMenus(HttpServletResponse response) throws Exception {
 		try {
-			logger.info("【findMenus】");
+			logger.info("==> [findMenus]");
 			//resourcesService.findResourcesList(page, resourcesCondition);
 		} catch (Exception e) {
-			logger.error("->异常： {}", e);
+			logger.error("==>异常：", e);
 			throw e;
 		}
 	}
 	
-	
+
+	@ResponseBody
 	@RequestMapping("/findTreeMenus")
 	public void findTreeMenus(HttpServletResponse response, ResourcesCondition resourceCondition) throws Exception {
-		logger.info("【findTreeMenus】");
+		logger.info("==>[findTreeMenus]");
 		List<Resources> resourceList = null;
 		try {
 			resourceList = this.resourcesService.findResourcesList(resourceCondition);
 		} catch (Exception e) {
-			logger.error("查询菜单异常：", e);
+			logger.error("==> 查询菜单异常：", e);
 		}
 		writeJson(response, resourceList);
 	}

@@ -16,11 +16,11 @@ public class IndexController extends BaseController {
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String index() {
-		logger.info("index首页");
+		logger.info("==> index首页");
 		try {
 			
 		} catch (Exception e) {
-			logger.error("【异常】：" ,e);
+			logger.error("==> 异常：" ,e);
 		}
 		
 		
@@ -30,7 +30,7 @@ public class IndexController extends BaseController {
 	
 	@RequestMapping("/error/notFound")
 	public String notFound(HttpServletRequest request) {
-		logger.info("【404页面】:" + request.getRequestURI());
+		logger.info("==> 404页面:" + request.getRequestURI());
 		return "error/404";
 	}
 }

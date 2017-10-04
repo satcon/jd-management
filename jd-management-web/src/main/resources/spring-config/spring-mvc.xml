@@ -47,35 +47,25 @@
 	<!-- 配置视图的显示 -->
 	<bean id="ViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
 		<property name="order" value="1" />
-
 		<!-- 视图文件的前缀，即存放的路径 -->
 		<!-- <property name="prefix" value="/WEB-INF/views/" /> -->
-
 		<!-- 视图文件的后缀名 -->
 		<property name="suffix" value=".vm" />
-		
 		<!--toolbox配置文件路径 -->
 		<!--<property name="toolboxConfigLocation" value="/WEB-INF/tools.xml"/> -->
-
 		<!--指定默认layout文件 -->
 		<property name="layoutUrl" value="layout/default.vm" />
 		<!-- 是否缓存 -->
 		<property name="cache" value="false" />
-
 		<!--日期函数名称 -->
 		<property name="dateToolAttribute" value="date" />
-
 		<!--数字函数名称 -->
 		<property name="numberToolAttribute" value="number" />
-
 		<property name="contentType" value="text/html;charset=UTF-8" />
-
 		<!--是否使用spring对宏定义的支持 -->
 		<property name="exposeSpringMacroHelpers" value="true" />
-
 		<!--是否开放request属性 -->
 		<property name="exposeRequestAttributes" value="true" />
-
 		<!--request属性引用名称 -->
 		<property name="requestContextAttribute" value="rc" />
 	</bean>
@@ -96,6 +86,7 @@
 			</list>
 		</property>
 	</bean>
+
 	
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="defaultContentType" value="text/html" />
@@ -120,7 +111,6 @@
 		<property name="defaultErrorView" value="error/error" />
 		<property name="exceptionMappings">
 			<props>
-				<!-- <prop key="com.jd.common.hrm.IllegalHrmPrivilegeException">error/access-denied</prop> -->
 				<prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error/404</prop>
 				<prop key="jave.sql.SQLException">error/uncaught</prop>
 				<prop key="java.lang.RuntimeException">error/404</prop>

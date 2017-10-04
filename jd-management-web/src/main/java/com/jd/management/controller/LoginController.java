@@ -13,7 +13,7 @@ public class LoginController {
 
 	@RequestMapping("/index")
 	public String index() {
-		logger.info("首页");
+		logger.info("==> 首页");
 		return "index";
 	}
 }
