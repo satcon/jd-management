@@ -10,11 +10,12 @@
 	</settings>
 	
 	<typeAliases>
-		
+        <typeAlias alias="userCondtion" type="com.jd.management.condition.UserCondition" />
 	</typeAliases>
 	 
 	<mappers>
 			<mapper resource="mybatis-mapper/ResourcesMapper.xml" />
+			<mapper resource="mybatis-mapper/UserMapper.xml" />
 	</mappers>
 	
 </configuration>

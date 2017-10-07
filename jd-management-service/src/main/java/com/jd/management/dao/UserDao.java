@@ -48,10 +48,21 @@ public class UserDao extends BaseDao {
 		return getSqlSession().update(this.getSqlId("deleteUser"), id);
 	}
 	/**  
-	* @Description: 按条件获取用户列表
-	* @param page
-	* @param user
-	* @return 
+	* 按条件分页获取用户列表
+	* @param userCondition
+	* @return
 	*/
-	//public List findUserList(@Param("page")Page page, @Param("po")UserCondition userCondition) {}
+	public List<User> findUserList(UserCondition userCondition) {
+	    return getSqlSession().selectList(this.getSqlId("findUserList"), userCondition);
+    }
+
+    /**
+     * 查询总数
+     *
+     * @param userCondition
+     * @return
+     */
+    public Integer countUserList(UserCondition userCondition) {
+        return getSqlSession().selectOne(this.getSqlId("countUserList"), userCondition);
+    }
 }

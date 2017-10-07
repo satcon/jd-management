@@ -1,6 +1,9 @@
 package com.jd.management.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.locks.Condition;
 
 import javax.annotation.Resource;
 
@@ -79,8 +82,19 @@ public class UserServiceImpl implements UserService {
 	public Integer deleteUser(Long id) {
 		return userDao.deleteUser(id);
 	}
-	public Page findUserList(Page page, UserCondition userCondition) {
-		//page.setRows(userDao.findUserList(page, userCondition));
+
+	@Override
+	public Page<User> findUserList(UserCondition userCondition) {
+        Page<User> page = new Page<User>();
+        List<User> resultList = new ArrayList<User>();
+
+        Integer totalCount = this.userDao.countUserList(userCondition);
+        if (totalCount != null && totalCount > 0) {
+            resultList = this.userDao.findUserList(userCondition);
+        }
+
+        page.setRows(resultList);
+        page.setTotal(totalCount);
 		return page;
 	}
 

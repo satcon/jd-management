@@ -5,6 +5,8 @@ import java.util.List;
 
 
 /**
+ * 分页对象
+ *
  * @param <T>
  * @author jianglongfei
  * @ClassName: Page
@@ -35,9 +37,9 @@ public class Page<T> implements Serializable {
     private int sortIndex;
 
     private String order;
-    
+
     private String sidx;
-    
+
     private String sord;
 
 

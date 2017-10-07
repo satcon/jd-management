@@ -33,10 +33,9 @@ public interface UserService {
 	
 	/**  
 	 * 查找用户分页数据
-	 * @param page
 	 * @param userCondition
 	 * @return 
 	 */
-	public Page findUserList(Page page,UserCondition userCondition);
+	public Page<User> findUserList(UserCondition userCondition);
 	 
 }

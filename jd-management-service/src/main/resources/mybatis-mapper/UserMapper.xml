@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jd.management.projects.dao.UserDao">
+<mapper namespace="com.jd.management.dao.UserDao">
 	<resultMap id="BaseResultMap" type="com.jd.management.domain.User">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="user_code" property="userCode" jdbcType="VARCHAR" />
@@ -46,22 +46,38 @@
 	</select>
 	
 	<!-- 根据条件查询列表 -->
-	<select id="findUserList" resultMap="BaseResultMap" parameterType="com.jd.management.projects.condition.UserCondition">
+	<select id="findUserList" resultMap="BaseResultMap" parameterType="userCondtion">
 		select
 		<include refid="Base_Column_List" />
 		from t_user
-		<where>   
-		 is_delete=0
-	 	<if test="po.userCode != null and po.userCode != ''">
-			   <![CDATA[   and user_code = #{po.userCode,jdbcType=VARCHAR}   ]]>  
-    	 </if>
-	 	<if test="po.userName != null and po.userName != ''">
-			   <![CDATA[   and user_name = #{po.userName,jdbcType=VARCHAR}   ]]>  
-    	 </if>
-		</where>
+        <where>
+            <if test="userCode != null and userCode != ''">
+                <![CDATA[ and user_code = #{userCode,jdbcType=VARCHAR} ]]>
+            </if>
+            <if test="userName != null and userName != ''">
+                <![CDATA[ and user_name = #{userName,jdbcType=VARCHAR} ]]>
+            </if>
+        </where>
+        limit ${begin}, ${rows}
 	</select>
+
+    <!-- 根据条件查询列表总数 -->
+    <select id="countUserList" resultType="int" parameterType="userCondtion">
+        select count(1)
+          from t_user
+        <where>
+            <if test="userCode != null and userCode != ''">
+                <![CDATA[ and user_code = #{userCode,jdbcType=VARCHAR} ]]>
+            </if>
+            <if test="userName != null and userName != ''">
+                <![CDATA[ and user_name = #{userName,jdbcType=VARCHAR} ]]>
+            </if>
+        </where>
+    </select>
+
+
 	<!-- 插入实体 -->
-	<insert id="insertUser" parameterType="com.jd.management.projects.domain.entity.User" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insertUser" parameterType="com.jd.management.domain.User" useGeneratedKeys="true" keyProperty="id">
 		insert into t_user 
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 		id,
@@ -98,7 +114,7 @@
 		</trim>
 	</insert>
 		<!-- 修改实体 -->
-	<update id="updateUser" parameterType="com.jd.management.projects.domain.entity.User">
+	<update id="updateUser" parameterType="com.jd.management.domain.User">
 		update t_user
 		<set>
 			<trim prefix="" suffix="" suffixOverrides=",">

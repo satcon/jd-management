@@ -13,9 +13,9 @@ import java.sql.Timestamp;
  * @author jiaodong
  * @Date 2017-01-06 15:05:16
  */
-public class UserCondition implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+public class UserCondition extends BaseCondition implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 	
 	/**
 	 * 唯一标识
