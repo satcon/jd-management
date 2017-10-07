@@ -2,9 +2,9 @@
 var tgSysmenu;
 $(document).ready(function(){
 	tgSysmenu = $('#tg-sysmenu').treegrid({
-		url : sys.basePath() + '/sys/menu/findMenus',
+		url : sys.basePath() + '/sys/resources/findMenuList',
 	    fit : true,
-	    fitColumns : true,
+	    fitColumns : false,
 	    striped : true,
 	    border : false,
 	    lines: true,
@@ -13,17 +13,20 @@ $(document).ready(function(){
 	    pagination : false,
 	    singleSelect : true,
 	    columns : [[
-	                {field:'id', title:'主键', hidden: true},
-	                {field:'parentId', title:'父节点', hidden: true},
-	                {field:'menuName',title:'菜单名称', width:250},
-	                {field:'iconCls',title:'图标', width:60, align:'center', formatter:viewMenuIcon},
-	                {field:'menuURL',title:'菜单链接', width:250},
-	                {field:'sortOrder',title:'排序',width:60,align:'center'}
+	                {field:'id', title:'ID', width:100},
+	                {field:'parentId', title:'父节点', width:100},
+	                {field:'resourceName',title:'菜单名称', width:300},
+	                {field:'resourceIcon',title:'图标', width:100, align:'center', formatter:viewMenuIcon},
+	                {field:'resourceUrl',title:'菜单链接', width:300},
+	                {field:'resourceOrder',title:'排序',width:100,align:'center'}
 	          ]],
 	    onLoadSuccess : function(row, data) {
         },
         onLoadError : function() {
-        	console.info('---->【加载失败！】');
+            $.messager.show({
+                title : '提示',
+                msg : '加载失败！'
+            });
         }
 }); // END datagrid
 

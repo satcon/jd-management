@@ -32,8 +32,7 @@ var menuTree = $('#menu-tree').tree();
 }); // END tree
 </script>
 
-
-<div class="easyui-panel" data-options="title:'导航',fit:true,border:false">
+<div class="easyui-panel" data-options="title:' ',fit:true,border:false">
     <div class="easyui-accordion" data-options="fit:true,border:false">
         <div title="系统菜单" >
              <ul id="menu-tree"></ul>

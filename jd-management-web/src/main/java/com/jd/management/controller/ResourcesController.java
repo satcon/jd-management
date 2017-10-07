@@ -26,35 +26,56 @@ public class ResourcesController extends BaseController{
 	
 	@Autowired
 	private ResourcesService resourcesService;
-	
+
+    /**
+     * 菜单配置页面
+     *
+     * @return
+     * @throws Exception
+     */
 	@RequestMapping("/viewMenus")
 	public String viewMenus() throws Exception {
 		logger.info("==> [系统菜单]");
 		return "sysmenu/index";
 	}
-	
-	@RequestMapping("/findMenus")
-	public void findMenus(HttpServletResponse response) throws Exception {
+
+    /**
+     * 查询所有菜单
+     *
+     * @param condition
+     * @throws Exception
+     */
+    @ResponseBody
+	@RequestMapping("/findMenuList")
+	public List<Resources> findMenuList(ResourcesCondition condition) throws Exception {
 		try {
-			logger.info("==> [findMenus]");
-			//resourcesService.findResourcesList(page, resourcesCondition);
+			logger.info("==> [findMenuList]");
+			return resourcesService.findResourcesList(condition);
 		} catch (Exception e) {
 			logger.error("==>异常：", e);
-			throw e;
+			return null;
 		}
 	}
-	
 
+
+    /**
+     * 查询所有树形菜单
+     *
+     * @param response
+     * @param resourceCondition
+     * @return
+     * @throws Exception
+     */
 	@ResponseBody
 	@RequestMapping("/findTreeMenus")
-	public void findTreeMenus(HttpServletResponse response, ResourcesCondition resourceCondition) throws Exception {
-		logger.info("==>[findTreeMenus]");
+	public List<Resources> findTreeMenus(HttpServletResponse response, ResourcesCondition resourceCondition) throws Exception {
+		logger.info("==> [findTreeMenus]");
 		List<Resources> resourceList = null;
 		try {
 			resourceList = this.resourcesService.findResourcesList(resourceCondition);
 		} catch (Exception e) {
 			logger.error("==> 查询菜单异常：", e);
 		}
-		writeJson(response, resourceList);
+        return resourceList;
 	}
 }

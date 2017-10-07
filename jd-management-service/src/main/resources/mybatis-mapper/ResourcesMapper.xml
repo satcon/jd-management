@@ -48,7 +48,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from t_resources
-		where id = #{id,jdbcType=BIGINT}
+		where id = #{id, jdbcType=BIGINT}
 	</select>
 	
 	<!-- 根据条件查询列表 -->
@@ -60,6 +60,7 @@
 		    yn = 1
 		</where>
 	</select>
+
 	<!-- 插入实体 -->
 	<insert id="insertResources" parameterType="com.jd.management.domain.Resources" useGeneratedKeys="true" keyProperty="id">
 		insert into t_resources 
@@ -103,64 +104,65 @@
 		#{ts,jdbcType=TIMESTAMP}, 
 		</trim>
 	</insert>
-		<!-- 修改实体 -->
+
+    <!-- 修改实体 -->
 	<update id="updateResources" parameterType="com.jd.management.domain.Resources">
 		update t_resources
-		<set>
-			<trim prefix="" suffix="" suffixOverrides=",">
-	        <if test="id != null">
-					id = #{id,jdbcType=BIGINT},
-	      		</if>
-	        <if test="resourcesCode != null">
-					resource_code = #{resourcesCode,jdbcType=VARCHAR},
-	      		</if>
-	        <if test="resourcesName != null">
-					resource_name = #{resourcesName,jdbcType=VARCHAR},
-	      		</if>
-			<if test="resourcesType != 0">
-					resource_type = #{resourcesType,jdbcType=TINYINT},
-	      		</if>
-	        <if test="resourcesUrl != null">
-					resource_url = #{resourcesUrl,jdbcType=VARCHAR},
-	      		</if>
-			<if test="resourcesLevel != 0">
-					resource_level = #{resourcesLevel,jdbcType=TINYINT},
-	      		</if>
-	        <if test="resourcesIcon != null">
-					resource_icon = #{resourcesIcon,jdbcType=VARCHAR},
-	      		</if>
-			<if test="resourcesOrder != 0">
-					resource_order = #{resourcesOrder,jdbcType=TINYINT},
-	      		</if>
-	        <if test="status != null">
-					status = #{status,jdbcType=VARCHAR},
-	      		</if>
-	        <if test="description != null">
-					description = #{description,jdbcType=VARCHAR},
-	      		</if>
-	        <if test="parentId != null">
-					parent_id = #{parentId,jdbcType=BIGINT},
-	      		</if>
-	        <if test="createTime != null">
-					create_time = #{createTime,jdbcType=TIMESTAMP},
-	      		</if>
-	        <if test="updateTime != null">
-					update_time = #{updateTime,jdbcType=TIMESTAMP},
-	      		</if>
-	        <if test="createUser != null">
-					create_user = #{createUser,jdbcType=VARCHAR},
-	      		</if>
-	        <if test="updateUser != null">
-					update_user = #{updateUser,jdbcType=VARCHAR},
-	      		</if>
-	        <if test="ts != null">
-					ts = #{ts,jdbcType=TIMESTAMP},
-	      		</if>
-			<if test="isDelete != 0">
-					yn = #{yn,jdbcType=TINYINT},
-	      		</if>
-			</trim>
-		</set>
+        <set>
+            <trim prefix="" suffix="" suffixOverrides=",">
+                <if test="id != null">
+                    id = #{id,jdbcType=BIGINT},
+                </if>
+                <if test="resourcesCode != null">
+                    resource_code = #{resourcesCode,jdbcType=VARCHAR},
+                </if>
+                <if test="resourcesName != null">
+                    resource_name = #{resourcesName,jdbcType=VARCHAR},
+                </if>
+                <if test="resourcesType != 0">
+                    resource_type = #{resourcesType,jdbcType=TINYINT},
+                </if>
+                <if test="resourcesUrl != null">
+                    resource_url = #{resourcesUrl,jdbcType=VARCHAR},
+                </if>
+                <if test="resourcesLevel != 0">
+                    resource_level = #{resourcesLevel,jdbcType=TINYINT},
+                </if>
+                <if test="resourcesIcon != null">
+                    resource_icon = #{resourcesIcon,jdbcType=VARCHAR},
+                </if>
+                <if test="resourcesOrder != 0">
+                    resource_order = #{resourcesOrder,jdbcType=TINYINT},
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=VARCHAR},
+                </if>
+                <if test="description != null">
+                    description = #{description,jdbcType=VARCHAR},
+                </if>
+                <if test="parentId != null">
+                    parent_id = #{parentId,jdbcType=BIGINT},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="createUser != null">
+                    create_user = #{createUser,jdbcType=VARCHAR},
+                </if>
+                <if test="updateUser != null">
+                    update_user = #{updateUser,jdbcType=VARCHAR},
+                </if>
+                <if test="ts != null">
+                    ts = #{ts,jdbcType=TIMESTAMP},
+                </if>
+                <if test="isDelete != 0">
+                    yn = #{yn,jdbcType=TINYINT},
+                </if>
+            </trim>
+        </set>
 		where id = #{id,jdbcType=BIGINT}
 	</update>
 	

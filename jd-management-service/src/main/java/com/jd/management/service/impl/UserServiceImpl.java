@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +21,7 @@ import com.jd.management.service.UserService;
  * 用户服务实现
  * @author jiaodong
  */
-@Component("userService")
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
 

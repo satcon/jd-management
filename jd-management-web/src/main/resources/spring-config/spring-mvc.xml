@@ -21,7 +21,7 @@
 	<context:component-scan base-package="com.jd.management.dao" />
 	
 	<!-- 默认的注解映射的支持 -->
-	<mvc:annotation-driven />
+	<!--<mvc:annotation-driven />-->
 
 	<!-- 静态资源处理 -->
 	<mvc:default-servlet-handler />
@@ -70,8 +70,21 @@
 		<property name="requestContextAttribute" value="rc" />
 	</bean>
 
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+
+	<!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>
 				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -85,7 +98,7 @@
 				</bean>
 			</list>
 		</property>
-	</bean>
+	</bean>-->
 
 	
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
