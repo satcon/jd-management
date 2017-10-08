@@ -10,31 +10,20 @@
 				border : false,
 				idField : 'userId',
 				pagination : true,
+                rownumbers : true,
 				singleSelect : false,
 				pageSize : 10,
 				pageList : [ 10, 20, 50, 100 ],
 				nowrap : false,
-				columns : [ [ {
-					field : 'userId',
-					title : '主键',
-					checkbox : true
-				}, {
-					field : 'userName',
-					title : '用户名',
-					width : 150
-				}, {
-					field : 'password',
-					title : '密码',
-					width : 150
-				} , {
-					field : 'createTime',
-					title : '创建时间',
-					width : 150
-				}, {
-					field : 'updateTime',
-					title : '最后修改时间',
-					width : 150
-				} ] ],
+				columns : [[
+				    {field : 'userId', title : '主键', checkbox : true},
+                    {field : 'userName', title : '用户名', width : 150},
+                    {field : 'telephone', title : '电话', width : 150},
+                    {field : 'mobilePhone', title : '手机', width : 150},
+                    {field : 'password', title : '密码', width : 150} ,
+                    {field : 'updateUser', title : '修改人', width : 150 },
+                    {field : 'updateTime', title : '修改时间', width : 150}
+                ]],
 				toolbar : [ {
 					text : '增加',
 					iconCls : 'icon-add',

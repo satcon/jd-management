@@ -1,6 +1,6 @@
 <div id="main-layout" class="easyui-layout" data-options="fit:true">
     <!-- 北部 -->
-	<div id="north" data-options="region:'north'" style="height: 50px;"></div>
+	<!--<div id="north" data-options="region:'north'" style="height: 50px;"></div>-->
 	
 	<!-- 南部 -->
 	<!-- <div data-options="region:'south'" style="height: 50px;"></div> -->

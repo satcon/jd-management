@@ -3,6 +3,7 @@ package com.jd.management.utils;
 import java.lang.management.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import java.util.List;
 public class JVMInfo {
 
     static final long MB = 1024 * 1024;
+
+    static final long GB = MB * 1024;
 
     public static void main(String[] args) {
         //打印系统信息
@@ -160,6 +163,11 @@ public class JVMInfo {
         }
     }
 
+    public static double getMaxHeapMemory() {
+        MemoryMXBean memory = ManagementFactory.getMemoryMXBean();
+        MemoryUsage headMemory = memory.getHeapMemoryUsage();
+        return (headMemory.getMax()/MB);
+    }
     private static void printMemoryInfo(){
         MemoryMXBean memory = ManagementFactory.getMemoryMXBean();
         MemoryUsage headMemory = memory.getHeapMemoryUsage();

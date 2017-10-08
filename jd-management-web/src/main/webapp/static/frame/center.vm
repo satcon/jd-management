@@ -23,7 +23,7 @@
                     fit : true,
                     iconCls : node.iconCls,
                     tools:[{
-                        iconCls:'icon-mini-refresh',
+                        iconCls:'pagination-load',
                         handler:function(){
                             refreshTab();
                         }
@@ -45,6 +45,7 @@
             options: _tab.panel('options')
         });
     }
+
 </script>
 
 <script type="text/javascript" charset="UTF-8" src="/static/js/projects/home/index.js"></script>
@@ -52,9 +53,9 @@
 <div id="centerTabs" class="easyui-tabs" data-options="border:false,fit:true" style="overflow: hidden;">
     <div title="首页" data-options="iconCls:'icon-home'" style="background:#ececf0; padding: 10px 10px 0px 10px;">
 
-        <div id="memroyPanel" class="easyui-panel" data-options="border:false" style="height: 410px;min-width: 1145px;">
+        <div id="memroyPanel" class="easyui-panel" data-options="border:false" style="height: 450px;min-width: 1145px;">
           <div title="" class="easyui-panel" data-options="fit:true" style="padding: 10px 10px 0px 10px;overflow: hidden;">
-              <div id="container" style="min-width:400px;height:400px"></div>
+              <div id="container" style="min-width:400px;height:400px; margin: 0 auto""></div>
           </div>
         </div>
 

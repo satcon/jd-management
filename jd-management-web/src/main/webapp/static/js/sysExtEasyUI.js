@@ -112,9 +112,10 @@ $.extend($.fn.panel.defaults, {
  * 
  */
 $.extend($.fn.pagination.defaults, {
-	layout:['list','sep','first','prev','sep','links','sep','next','last','sep','manual','sep','refresh'],
+	layout:['list','sep','first','prev','sep','links','sep','next','last','sep','manual','sep','refresh','info'],
 	beforePageText:'第',
-	afterPageText:'页  共{pages}页'
+	afterPageText:'页   共{pages}页',
+    displayMsg: '共 {total} 条记录'
 });
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration status="error" strict="true">
+<configuration>
     <Properties>
         <Property name="LOG.PATH">D:/export/home/tomcat/logs</Property>
         <!--
@@ -21,19 +21,8 @@
 	<appenders>
 		<!--这个输出控制台的配置-->
 		<Console name="console" target="SYSTEM_OUT">
-			<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
-			<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" />
 			<PatternLayout pattern="${LOG.PATTERN}" />
 		</Console>
-
-		<!-- <File name="infoFile" fileName="${LOG.PATH}/jd-delivery-clerk-info.log">
-			<ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" />
-			<PatternLayout pattern="${LOG.PATTERN}" />
-		</File>
-		<File name="errorFile" fileName="/export/home/tomcat/logs/jd-delivery-clerk-error.log">
-			<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
-			<PatternLayout pattern="[%p][%d{yyyy-MM-dd HH:mm:ss.SSS}]%m[%c:%M]%n" />
-		</File> -->
 
 		<!-- INFO FILE -->
 		<RollingRandomAccessFile name="infoFile" bufferSize="8192" 
@@ -41,10 +30,10 @@
 				fileName="${LOG.PATH}/jd_management_info.log" 
 				filePattern="${LOG.PATH}/jd_management_info.log-%d{yyyy-MM-dd}-%i.log">
 			<Filters>
-				<!-- <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />
-				<ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="NEUTRAL" /> -->
+				<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />
+				<ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="NEUTRAL" />
 				<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />
-				<!-- <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" /> -->
+				<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" />
 			</Filters>
 			<PatternLayout pattern="${LOG.PATTERN}" />
 			<Policies>
@@ -71,26 +60,29 @@
 			<DefaultRolloverStrategy max="5" />
 		</RollingRandomAccessFile>
 
-		<Async name="Async">
-			<!-- 生产环境去掉console -->
+		<!--<Async name="Async">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="infoFile" />
 			<AppenderRef ref="errorFile" />
-		</Async>
+		</Async>-->
 	</appenders>
 
 	<!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
 	<loggers>
 		<!--建立一个默认的root的logger-->
-		<AsyncRoot level="INFO">
-			<appender-ref ref="Async" />
+		<AsyncRoot level="DEBUG">
+            <!-- 生产环境去掉console -->
+            <AppenderRef ref="console" />
+            <AppenderRef ref="infoFile" />
+            <AppenderRef ref="errorFile" />
 		</AsyncRoot>
 		<Logger name="java.sql" level="DEBUG" />
 		<Logger name="org.springframework" level="INFO" />
 		<Logger name="org.apache.commons" level="INFO" />
 		<Logger name="org.mybatis.spring" level="INFO" />
 		<Logger name="org.apache.ibatis" level="INFO" />
-		<Logger name="org.apache.velocity.app" level="INFO" />
+		<Logger name="com.alibaba.druid.pool.PreparedStatementPool" level="INFO" />
+		<Logger name="org.apache.velocity" level="INFO" />
 		<Logger name="org.apache.http.wire" level="INFO" />
 	</loggers>
 
