@@ -29,6 +29,7 @@ $(function(){
             title: {
                 text: 'MB'
             },
+            min: 0,
             plotLines: [{
                 value: 0,
                 width: 1,
