@@ -80,8 +80,6 @@ function requestData() {
             var x = (new Date()).getTime(), // current time
                 y = Number(data);
 
-            console.info(typeof y);
-
             // 新增点操作
             //具体的参数详见：https://api.hcharts.cn/highcharts#Series.addPoint
             myChart.series[0].addPoint([x, y], true, true);
